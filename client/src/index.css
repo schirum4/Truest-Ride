@@ -1,0 +1,609 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap");
+
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-tertiary: #e8e8e8;
+  --text-primary: #000000;
+  --text-secondary: #535353;
+  --text-tertiary: #838383;
+  --btn-primary: #0f0f0f;
+  --btn-primary-hover: #1d1d1d;
+  --btn-secondary: #33bb7a;
+  --btn-secondary-hover: #389e6e;
+  --btn-danger: #e14d4d;
+  --font-family-primary: "Inter", serif;
+  --font-family-secondary: "Libre Baskerville", serif;
+  --ui-outline: #d7d7d7;
+  --ui-outline-danger: rgba(225, 77, 77, 0.2);
+  --transition-time: 0.25s;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #000000;
+  --bg-secondary: #131313;
+  --bg-tertiary: #272727;
+  --text-primary: #f9f9f9;
+  --text-secondary: #acacac;
+  --text-tertiary: #7c7c7c;
+  --btn-primary: #f0f0f0;
+  --btn-primary-hover: #e2e2e2;
+  --ui-outline: #383838;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-primary);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color var(--transition-time), color var(--transition-time);
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+.username {
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 400;
+  transition: all var(--transition-time) ease-out;
+}
+
+.username:hover {
+  color: var(--btn-secondary);
+}
+
+/* ========== BUTTON STYLES ========== */
+.btn {
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 100%;
+  color: var(--bg-primary);
+  cursor: pointer;
+  transition: all var(--transition-time) linear;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 20px;
+  background: var(--btn-primary);
+}
+
+.btn:hover {
+  background: var(--btn-primary-hover);
+}
+
+/* ========== NAVBAR STYLING ========== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--bg-primary);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--bg-tertiary);
+  width: 100%;
+  z-index: 1;
+  font-weight: 300;
+  max-height: 65px;
+}
+
+.navbar__logo {
+  font-family: var(--font-family-secondary);
+  font-size: 1.5rem;
+  margin: 1rem;
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__link {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 14px;
+  padding: 1.5rem 1rem;
+  transition: all var(--transition-time) linear;
+  cursor: pointer;
+}
+
+.navbar__link-icon {
+  display: none;
+}
+
+/* ion-icon[name="person-circle-outline"] {
+  font-size: 36px;
+  transition: color var(--transition-time) linear;
+} */
+
+.navbar__profile {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+}
+
+.navbar__profile__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 4px;
+}
+
+.navbar__link__profile_icon:hover {
+  border: 1px solid var(--text-primary);
+}
+
+.navbar__link__profile__dropdown {
+  position: absolute;
+  top: 66px;
+  right: 0;
+  transform: translateX(-10%);
+  background-color: var(--bg-tertiary);
+  border-radius: 4px;
+  width: 200px;
+  /* z-index: 1; */
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  margin-top: 10px;
+  margin-right: -10px;
+  visibility: hidden;
+  transition: var(--transition-time);
+  opacity: 0;
+}
+
+.navbar__link__profile__dropdown.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.navbar__link__profile__dropdown::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: 15px;
+  width: 20px;
+  height: 20px;
+  background: var(--bg-tertiary);
+  transform: rotate(45deg);
+}
+
+.navbar__link__profile__dropdown__item {
+  font-size: 14px;
+  padding: 10px;
+  color: var(--text-primary);
+  border: 1px solid var(--bg-tertiary);
+  text-decoration: none;
+  transition: all var(--transition-time) linear;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.navbar__link__profile__dropdown__item:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+.navbar__link__profile__dropdown__item:hover {
+  border: 1px solid var(--ui-outline);
+}
+
+/* Whenever a NavLink is active, it will automatically have 
+an .active class name for easy styling with CSS */
+.navbar__link.active {
+  color: var(--text-primary);
+}
+
+.navbar__link:hover {
+  color: var(--text-primary);
+}
+
+.navbar__link__join {
+  background-color: var(--btn-secondary);
+  color: var(--bg-primary);
+}
+
+.navbar__link__join:hover {
+  background-color: var(--btn-primary);
+  color: var(--bg-primary);
+}
+
+.navbar__link__profile {
+  background-color: var(--bg-primary);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  top: 100%;
+  left: 0;
+  width: 200px;
+  z-index: 1;
+}
+
+/* ========== FOOTER STYLING ========== */
+.footer {
+  font-weight: 300;
+  font-size: 0.875rem;
+  max-width: 1120px;
+  /* width: 100%; */
+  padding: 0 1rem;
+  margin: 0 auto 5rem auto;
+  text-align: left;
+}
+
+.footer-flex {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-flex-item__label {
+  color: var(--btn-primary);
+  margin-bottom: 1.25rem;
+}
+
+.footer-flex-item__link {
+  color: var(--text-secondary);
+  margin-bottom: 0.625rem;
+  font-size: 0.75rem;
+  transition: all var(--transition-time) linear;
+}
+
+.footer-flex-item__links a {
+  text-decoration: none;
+  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-flex-item__link:hover {
+  color: var(--btn-primary);
+}
+
+.footer-flex-item__subscribe {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--text-secondary);
+  padding: 0.4rem;
+  border-radius: 4px;
+  transition: all var(--transition-time) linear;
+}
+
+.footer-flex-item__subscribe:focus-within {
+  border: 1px solid var(--btn-primary);
+}
+
+.footer-flex-item__subscribe__input {
+  background: transparent;
+  font-family: var(--font-family-primary);
+  color: var(--btn-primary);
+  border: none;
+  outline: none;
+}
+
+.footer-flex-item__subscribe__button {
+  background: var(--btn-primary);
+  padding: 0.3rem;
+  font-weight: 700;
+  border-radius: 4px;
+  font-size: 14px;
+  border: none;
+}
+
+.footer-flex-item__subscribe__button:hover {
+  background: var(--btn-primary-hover);
+}
+
+/* ========== AUTH FORM STYLES ========== */
+.form__wrapper {
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 1.25rem;
+  padding: 0 10px;
+  font-weight: 300;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  font-size: 14px;
+}
+
+.form__label {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+}
+
+.form__label--error {
+  color: var(--btn-danger);
+}
+
+.form__hero__text__title {
+  font-family: var(--font-family-secondary);
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+.form__hero__text__subtitle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 16px;
+  line-height: 145%;
+}
+
+.form__input {
+  padding: 14px 16px;
+  border: 1px solid var(--text-secondary);
+  outline: none;
+  display: block;
+  width: 100%;
+  background: transparent;
+  transition: all var(--transition-time) linear;
+  color: var(--text-primary);
+  cursor: text;
+}
+
+.form__group select option:first-child {
+  color: var(--text-secondary);
+}
+
+.form__input--error {
+  border: 1px solid var(--btn-danger);
+}
+
+select.form__input {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23acacac' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  padding-right: 2.5rem;
+}
+
+/* REACT DATEPICKER CUSTOME STYLES */
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker-wrapper .react-datepicker__close-icon::after {
+  background-color: var(--text-secondary);
+  color: var(--bg-primary);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.form__input:focus,
+.form__input:hover {
+  border: 1px solid var(--btn-primary);
+}
+
+.form__input--error:focus,
+.form__input--error:hover {
+  border: 1px solid var(--btn-danger);
+}
+
+.form__input::placeholder {
+  color: var(--text-secondary);
+}
+
+.form__button {
+  font-size: 14px;
+  color: var(--bg-primary);
+  padding: 14px 20px;
+  border-radius: 2px;
+  gap: 0.5rem;
+}
+
+.form__button--email {
+  border: 1px solid var(--btn-secondary);
+  background: var(--btn-secondary);
+}
+
+.form__button--email:hover {
+  border: 1px solid var(--btn-secondary-hover);
+  background: var(--btn-secondary-hover);
+}
+
+.form__button--microsoft {
+  border: 1px solid var(--btn-primary);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.form__button--microsoft:hover {
+  background-color: var(--btn-primary-hover);
+  color: var(--bg-primary);
+}
+
+.form__button-container {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+}
+
+.form__button--danger {
+  color: var(--btn-danger);
+  border: 1px solid var(--btn-danger);
+  background: transparent;
+}
+
+.form__button--danger:hover:not(:disabled) {
+  background: var(--btn-danger);
+  color: var(--text-primary);
+}
+
+.form__button--cancel {
+  color: var(--text-secondary);
+  border: 1px solid var(--text-secondary);
+  background: transparent;
+}
+
+.form__button--cancel:hover:not(:disabled) {
+  color: var(--bg-primary);
+  border: 1px solid var(--text-primary);
+  background: var(--text-primary);
+}
+
+.form__divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.form__divider .line {
+  flex: 1;
+  border: none;
+  height: 1px;
+  background-color: var(--ui-outline);
+}
+
+.form__divider .or-text {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-secondary);
+}
+
+.illustration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 7rem 0;
+  padding: 1rem;
+}
+
+.illustration img {
+  width: 100%;
+  max-width: 800px;
+}
+
+.form__footer {
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.form__footer a {
+  color: var(--text-secondary);
+  transition: all var(--transition-time) ease-out;
+}
+
+.form__footer a:hover {
+  color: var(--text-primary);
+}
+
+.form__footer--resend {
+  color: var(--btn-secondary);
+  cursor: pointer;
+  font-weight: bold;
+  transition: all var(--transition-time) ease-out;
+}
+/* ========== NOTIFICATION STYLES ========== */
+
+.notification {
+  padding: 14px;
+  transform: all var(--transition-time) ease-in-out;
+}
+
+.home .notification {
+  margin-bottom: 24px;
+}
+
+.notification__success {
+  border: 1px solid rgba(51, 187, 122, 0.2);
+}
+
+.notification__error {
+  border: 1px solid var(--ui-outline-danger);
+}
+
+.notification__message {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 14px;
+}
+
+.home .notification__message {
+  margin-bottom: 0;
+}
+
+.notification__success .notification__message {
+  color: var(--btn-secondary);
+}
+
+.notification__error .notification__message {
+  color: var(--btn-danger);
+}
+
+.notification__message ion-icon {
+  font-size: 24px;
+}
+
+/* ========== LOADER STYLES ========== */
+.loader-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* ========== KEYFRAMES ========== */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========== RESPONSIVE ========== */
+
+@media (max-width: 768px) {
+  .navbar__link-text {
+    display: none;
+  }
+  .navbar__link-icon {
+    display: block;
+    font-size: 16px;
+  }
+
+  .navbar__profile__name {
+    display: none;
+  }
+
+  .navbar__profile__avatar {
+    width: 30px;
+    height: 30px;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar__logo {
+    font-size: 1rem;
+    text-decoration: underline;
+  }
+}
